@@ -1,15 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const repo = require('../lib/repo');
+const queue = require('../lib/queue');
 
 const webhookRoute = (req, res) => {
   const message = {
     text: req.body,
   };
-  repo
-    .create(message)
-    .then(record => {
-      res.end('Saved ' + JSON.stringify(record));
+  queue
+    .send('incoming', message)
+    .then(() => {
+      res.end('Received ' + JSON.stringify(message));
     })
     .catch(e => {
       console.error(e);
