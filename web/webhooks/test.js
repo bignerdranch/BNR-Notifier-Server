@@ -1,6 +1,4 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const queue = require('../lib/queue');
+const queue = require('../../lib/queue');
 
 const webhookRoute = (req, res) => {
   const message = {
@@ -18,7 +16,4 @@ const webhookRoute = (req, res) => {
     });
 };
 
-const router = express.Router();
-router.post('/', bodyParser.text({ type: '*/*' }), webhookRoute);
-
-module.exports = router;
+module.exports = webhookRoute;
