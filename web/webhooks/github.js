@@ -1,5 +1,7 @@
 const queue = require('../../lib/queue');
 
+const actionsToNotify = ['opened', 'closed'];
+
 const webhookRoute = (req, res) => {
   console.log(JSON.stringify(req.body));
 
@@ -15,6 +17,12 @@ const webhookRoute = (req, res) => {
   };
 
   console.log(message);
+
+  if (!actionsToNotify.includes(action)) {
+    console.log(`${action} not included in ${actionsToNotify}; skipping`);
+    return;
+  }
+
   queue
     .send('incoming', message)
     .then(() => {
