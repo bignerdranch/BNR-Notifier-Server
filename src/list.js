@@ -1,5 +1,5 @@
 const express = require('express');
-const repo = require('../lib/repo');
+const repo = require('./repo');
 
 const listRoute = (req, res) => {
   repo

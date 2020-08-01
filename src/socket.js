@@ -1,5 +1,5 @@
 const WebSocketServer = require('websocket').server;
-const queue = require('../lib/queue');
+const queue = require('./queue');
 
 const configureWebSockets = httpServer => {
   const wsServer = new WebSocketServer({ httpServer });

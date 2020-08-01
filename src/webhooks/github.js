@@ -1,4 +1,4 @@
-const queue = require('../../lib/queue');
+const queue = require('../queue');
 
 const actionsToNotify = ['opened', 'closed'];
 
