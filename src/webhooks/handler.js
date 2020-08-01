@@ -1,4 +1,4 @@
-const repo = require('../lib/repo');
+const repo = require('../repo');
 const { send } = require('../socket');
 const push = require('../push');
 

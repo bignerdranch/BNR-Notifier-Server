@@ -1,4 +1,4 @@
-const expo = require('../lib/expo');
+const expo = require('./expo');
 
 const handlePush = message => {
   console.log('handling push', message);

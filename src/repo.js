@@ -1,23 +1,9 @@
-const mongoose = require('mongoose');
+const db = require('../models');
+const { Message } = db;
 
-const dbUrl = process.env.MONGODB_URI;
+const create = attrs => Message.create(attrs);
 
-mongoose.connect(dbUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-mongoose.connection.on('error', console.error);
-
-const messageSchema = new mongoose.Schema({
-  text: String,
-  url: String,
-});
-
-const Message = mongoose.model('Message', messageSchema);
-
-const create = attrs => new Message(attrs).save();
-
-const list = () => Message.find().then(messages => messages.slice().reverse());
+const list = () =>
+  Message.findAll().then(messages => messages.slice().reverse());
 
 module.exports = { create, list };
