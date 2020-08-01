@@ -1,2 +1,0 @@
-web: node web
-worker: node workers
