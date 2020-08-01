@@ -1,13 +1,11 @@
-const queue = require('../lib/queue');
 const repo = require('../lib/repo');
+const { send } = require('../socket');
+const push = require('../push');
 
 const handleIncoming = message =>
   repo.create(message).then(record => {
     console.log('Saved ' + JSON.stringify(record));
-    return Promise.all([
-      queue.send('socket', record),
-      queue.send('push', record),
-    ]);
+    return Promise.all([send(record), push(record)]);
   });
 
 module.exports = handleIncoming;

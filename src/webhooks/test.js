@@ -1,11 +1,10 @@
-const queue = require('../queue');
+const handler = require('./handler');
 
 const webhookRoute = (req, res) => {
   const message = {
     text: req.body,
   };
-  queue
-    .send('incoming', message)
+  handler(message)
     .then(() => {
       res.end('Received ' + JSON.stringify(message));
     })

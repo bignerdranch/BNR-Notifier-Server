@@ -1,10 +1,9 @@
 const WebSocketServer = require('websocket').server;
-const queue = require('./queue');
+
+let connection;
 
 const configureWebSockets = httpServer => {
   const wsServer = new WebSocketServer({ httpServer });
-
-  let connection;
 
   wsServer.on('request', function(request) {
     connection = request.accept(null, request.origin);
@@ -15,16 +14,14 @@ const configureWebSockets = httpServer => {
       connection = null;
     });
   });
-
-  queue
-    .receive('socket', message => {
-      if (!connection) {
-        console.log('no WebSocket connection');
-        return;
-      }
-      connection.sendUTF(JSON.stringify(message));
-    })
-    .catch(console.error);
 };
 
-module.exports = configureWebSockets;
+const send = message => {
+  if (!connection) {
+    console.log('no WebSocket connection');
+    return;
+  }
+  connection.sendUTF(JSON.stringify(message));
+};
+
+module.exports = { configureWebSockets, send };

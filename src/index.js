@@ -6,7 +6,7 @@ const http = require('http');
 const express = require('express');
 const webhookRouter = require('./webhooks');
 const listRouter = require('./list');
-const configureWebSockets = require('./socket');
+const { configureWebSockets } = require('./socket');
 
 const app = express();
 

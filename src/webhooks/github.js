@@ -1,4 +1,4 @@
-const queue = require('../queue');
+const handler = require('./handler');
 
 const actionsToNotify = ['opened', 'closed'];
 
@@ -23,8 +23,7 @@ const webhookRoute = (req, res) => {
     return;
   }
 
-  queue
-    .send('incoming', message)
+  handler(message)
     .then(() => {
       res.end('Received ' + JSON.stringify(message));
     })
